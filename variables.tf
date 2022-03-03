@@ -24,6 +24,12 @@ variable "clients" {
   description = "The clients to create."
 }
 
+variable "access_token_validity" {
+  type        = number
+  default     = 60
+  description = "The time (in minutes) after which the access token is no longer valid and cannot be used. Valid values are between 5 and 1440 minutes (1 day)."
+}
+
 locals {
   prefix = format("%s-tilores", var.resource_prefix)
 }

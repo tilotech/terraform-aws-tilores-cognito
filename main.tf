@@ -45,7 +45,7 @@ resource "aws_cognito_user_pool_client" "client" {
   ]
   allowed_oauth_flows_user_pool_client = true
 
-  access_token_validity  = 60
+  access_token_validity  = var.access_token_validity
   id_token_validity      = 60
   refresh_token_validity = 30
 
