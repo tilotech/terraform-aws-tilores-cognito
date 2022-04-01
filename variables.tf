@@ -18,9 +18,7 @@ variable "available_scopes" {
 }
 
 variable "clients" {
-  type = map(object({
-    allowed_scopes = list(string)
-  }))
+  type        = any
   description = "The clients to create."
 }
 
