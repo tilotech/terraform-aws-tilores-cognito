@@ -34,9 +34,9 @@ module "cognito" {
 
 By default the module should be used like this:
 
-```
+```hcl
 module "cognito" {
-  source = "../../../terraform-aws-tilores-cognito"
+  source = "tilotech/tilores-cognito/aws"
   ...
   clients = {
     client = {
@@ -54,9 +54,9 @@ for machine to machine communication using the client credentials flow.
 If you want to create a client that can be used with other flows, you have to
 customize the configuration.
 
-```
+```hcl
 module "cognito" {
-  source = "../../../terraform-aws-tilores-cognito"
+  source = "tilotech/tilores-cognito/aws"
   ...
   clients = {
     client = {
@@ -69,9 +69,7 @@ module "cognito" {
       allowed_scopes = [
         "openid",
         "profile",
-        "email",
-        "tilores/query.search",
-        "tilores/query.entity"
+        ...
       ]
       generate_secret = false
       explicit_auth_flows = [
