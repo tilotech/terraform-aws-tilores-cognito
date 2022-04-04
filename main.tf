@@ -36,18 +36,18 @@ resource "aws_cognito_user_pool_client" "client" {
   for_each = var.clients
 
   name                 = each.key
-  allowed_oauth_flows  = ["client_credentials"]
-  allowed_oauth_scopes = each.value["allowed_scopes"]
-  generate_secret      = true
-  explicit_auth_flows = [
+  allowed_oauth_flows  = try(each.value["allowed_oauth_flows"], ["client_credentials"])
+  allowed_oauth_scopes = try(each.value["allowed_scopes"], [])
+  generate_secret      = try(each.value["generate_secret"], true)
+  explicit_auth_flows = try(each.value["explicit_auth_flows"], [
     "ALLOW_USER_PASSWORD_AUTH",
     "ALLOW_REFRESH_TOKEN_AUTH"
-  ]
+  ])
   allowed_oauth_flows_user_pool_client = true
 
-  access_token_validity  = var.access_token_validity
-  id_token_validity      = 60
-  refresh_token_validity = 30
+  access_token_validity  = try(each.value["access_token_validity"], var.access_token_validity)
+  id_token_validity      = try(each.value["id_token_validity"], 60)
+  refresh_token_validity = try(each.value["refresh_token_validity"], 30)
 
   token_validity_units {
     access_token  = "minutes"
@@ -56,6 +56,10 @@ resource "aws_cognito_user_pool_client" "client" {
   }
 
   prevent_user_existence_errors = "ENABLED"
+
+  callback_urls                = try(each.value["callback_urls"], null)
+  logout_urls                  = try(each.value["logout_urls"], null)
+  supported_identity_providers = try(each.value["supported_identity_providers"], null)
 
   user_pool_id = aws_cognito_user_pool.pool.id
 }
