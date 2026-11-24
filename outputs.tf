@@ -4,12 +4,12 @@ output "issuer_url" {
 }
 
 output "token_url" {
-  value       = format("https://%s.auth.%s.amazoncognito.com/oauth2/token", aws_cognito_user_pool_domain.domain.domain, data.aws_region.current.name)
+  value       = format("https://%s.auth.%s.amazoncognito.com/oauth2/token", aws_cognito_user_pool_domain.domain.domain, data.aws_region.current.region)
   description = "The URL for receiving an access token using the OAuth 2.0 client credentials flow."
 }
 
 output "user_pool_domain" {
-  value       = format("%s.auth.%s.amazoncognito.com", aws_cognito_user_pool_domain.domain.domain, data.aws_region.current.name)
+  value       = format("%s.auth.%s.amazoncognito.com", aws_cognito_user_pool_domain.domain.domain, data.aws_region.current.region)
   description = "The domain name of the user pool, used by all OAuth 2.0 flows."
 }
 
