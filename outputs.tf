@@ -25,6 +25,7 @@ output "client_secrets" {
     for k, client in aws_cognito_user_pool_client.client : k => client.client_secret
   })
   description = "The client secrets."
+  sensitive   = true
 }
 
 output "cloudfront_distribution_arn" {
