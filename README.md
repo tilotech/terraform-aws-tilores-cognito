@@ -115,4 +115,4 @@ logout_urls = null
 supported_identity_providers = null
 ```
 
-Access and ID token validity are provided in hours. The refresh token validity is provided in days.
+Access and ID token validity are provided in minutes. The refresh token validity is provided in days.
